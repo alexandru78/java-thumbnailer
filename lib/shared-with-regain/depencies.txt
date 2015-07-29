@@ -4,6 +4,5 @@ pdfbox
 
 aperture
 > rdf2go
-> slf4j
 
 log4j
