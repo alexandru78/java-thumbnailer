@@ -17,16 +17,17 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * Contact: Come_IN-Team <come_in-team@listserv.uni-siegen.de>
- * 
+ *
  * Concept from Nuxeo:
  * nuxeo-platform-mimetype-core/src/main/java/org/nuxeo/ecm/platform/mimetype/detectors/PptMimetypeSniffer.java (v5.5)
- * Licenced LGPL 2.1 
+ * Licenced LGPL 2.1
  * (C) Copyright 2006-2007 Nuxeo SAS (http://nuxeo.com/) and contributors.
  */
 
 package de.uni_siegen.wineme.come_in.thumbnailer.util.mime;
 
-import org.apache.poi.hslf.usermodel.SlideShow;
+import org.apache.poi.sl.usermodel.SlideShow;
+import org.apache.poi.xslf.usermodel.XMLSlideShow;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,9 +45,9 @@ public class PptFileIdentifier extends OfficeFileIdentifier {
         if (isOfficeFile(mimeType) && !PPT_MIME_TYPE.equals(mimeType)) {
             try {
                 FileInputStream stream = new FileInputStream(file);
-                SlideShow presentation = new SlideShow(stream);
+                SlideShow presentation = new XMLSlideShow(stream);
 
-                if (presentation.getSlides().length != 0) {
+                if (presentation.getSlides().size() != 0) {
                     return PPT_MIME_TYPE;
                 }
             } catch (Throwable e) {

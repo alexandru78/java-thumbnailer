@@ -1,6 +1,6 @@
 package de.uni_siegen.wineme.come_in.thumbnailer.util;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.awt.*;
 import java.awt.image.ImageObserver;
@@ -10,12 +10,9 @@ import java.awt.image.ImageObserver;
  * asynchronously.
  * @author Benjamin
  */
+@Slf4j
 public class ThumbnailReadyObserver implements ImageObserver {
 
-    /**
-     * The logger for this class
-     */
-    private final static Logger mLog = Logger.getLogger(ThumbnailReadyObserver.class);
     public volatile boolean ready = false;
     private Thread toNotify;
 
@@ -26,10 +23,10 @@ public class ThumbnailReadyObserver implements ImageObserver {
 
     public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
 
-        mLog.info("Observer debug info: imageUpdate: " + infoflags);
+        log.info("Observer debug info: imageUpdate: " + infoflags);
         if ((infoflags & ImageObserver.ALLBITS) > 0) {
             ready = true;
-            mLog.info("Observer says: Now ready!");
+            log.info("Observer says: Now ready!");
             toNotify.notify();
             return true;
         }

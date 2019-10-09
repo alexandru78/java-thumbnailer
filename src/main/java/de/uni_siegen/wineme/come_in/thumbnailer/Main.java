@@ -25,25 +25,18 @@ import de.uni_siegen.wineme.come_in.thumbnailer.thumbnailers.NativeImageThumbnai
 import de.uni_siegen.wineme.come_in.thumbnailer.thumbnailers.OpenOfficeThumbnailer;
 import de.uni_siegen.wineme.come_in.thumbnailer.thumbnailers.PDFBoxThumbnailer;
 import jirau.DWGThumbnailer;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.cli.*;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 /**
  * Little Command-line Application to illustrate the usage of this library.
  * @author Benjamin
  * @needs Commons-cli (included in jodconverter)
  */
+@Slf4j
 public class Main {
-    private static final String LOG4J_CONFIG_FILE = "conf/javathumbnailer.log4j.properties";
-    protected static Logger mLog = Logger.getLogger(Main.class);
     private static Options options;
     private static ThumbnailerManager thumbnailer;
     private static File outFile;
@@ -54,7 +47,6 @@ public class Main {
             explainUsage();
             System.exit(-1);
         }
-        initLogging();
 
         thumbnailer = new ThumbnailerManager();
 
@@ -78,14 +70,13 @@ public class Main {
 
     private static void initParams() {
         options = new Options();
-        OptionBuilder.withArgName("WIDTHxHEIGHT");
-        OptionBuilder.hasArg();
-        OptionBuilder.withDescription("Size of the new thumbnail (default: 160x120)");
-        options.addOption(OptionBuilder.create("size"));
+        Option option = Option.builder("size").desc("Size of the new thumbnail (default: 160x120)")
+                .hasArg().argName("WIDTHxHEIGHT").build();
+        options.addOption(option);
     }
 
     private static void parseParams(String[] params) {
-        CommandLineParser parser = new GnuParser();
+        CommandLineParser parser = new DefaultParser();
         CommandLine line = null;
         try {
             line = parser.parse(options, params);
@@ -128,39 +119,6 @@ public class Main {
         thumbnailer.registerThumbnailer(new OpenOfficeThumbnailer());
         thumbnailer.registerThumbnailer(new PDFBoxThumbnailer());
         thumbnailer.registerThumbnailer(new DWGThumbnailer());
-    }
-
-    protected static void initLogging() throws IOException {
-        System.setProperty("log4j.configuration", LOG4J_CONFIG_FILE);
-
-        File logConfigFile = new File(LOG4J_CONFIG_FILE);
-        if (!logConfigFile.exists()) {
-            // Extract config properties from jar
-            InputStream in = Main.class.getResourceAsStream("/" + LOG4J_CONFIG_FILE);
-            if (in == null) {
-                System.err.println("Packaging error: can't find logging configuration inside jar. (Neither can I find the config file on the file system: " + logConfigFile.getAbsolutePath() + ")");
-                System.exit(1);
-            }
-
-            OutputStream out = null;
-            try {
-                out = FileUtils.openOutputStream(logConfigFile);
-                IOUtils.copy(in, out);
-            } finally {
-                try {
-                    if (in != null) {
-                        in.close();
-                    }
-                } finally {
-                    if (out != null) {
-                        out.close();
-                    }
-                }
-            }
-        }
-
-        PropertyConfigurator.configureAndWatch(logConfigFile.getAbsolutePath(), 10 * 1000);
-        mLog.info("Logging initialized");
     }
 
     public static boolean classExists(String qualifiedClassname) {

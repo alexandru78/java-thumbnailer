@@ -22,14 +22,14 @@
 package de.uni_siegen.wineme.come_in.thumbnailer;
 
 import de.uni_siegen.wineme.come_in.thumbnailer.thumbnailers.Thumbnailer;
-import de.uni_siegen.wineme.come_in.thumbnailer.util.ChainedHashMap;
 import de.uni_siegen.wineme.come_in.thumbnailer.util.IOUtil;
 import de.uni_siegen.wineme.come_in.thumbnailer.util.StringUtil;
 import de.uni_siegen.wineme.come_in.thumbnailer.util.mime.MimeTypeDetector;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -43,6 +43,7 @@ import java.util.Queue;
  * generateThumbnail().
  * @author Benjamin
  */
+@Slf4j
 public class ThumbnailerManager implements Thumbnailer, ThumbnailerConstants {
 
     /**
@@ -58,10 +59,6 @@ public class ThumbnailerManager implements Thumbnailer, ThumbnailerConstants {
      * MIME Type for "all MIME" within thumbnailers Hash
      */
     private static final String ALL_MIME_WILDCARD = "*/*";
-    /**
-     * The logger for this class
-     */
-    private static Logger mLog = Logger.getLogger(ThumbnailerManager.class);
     /**
      * Width of thumbnail picture to create (in Pixel)
      */
@@ -81,7 +78,7 @@ public class ThumbnailerManager implements Thumbnailer, ThumbnailerConstants {
     /**
      * Thumbnailers per MIME-Type they accept (ALL_MIME_WILDCARD for all)
      */
-    private ChainedHashMap<String, Thumbnailer> thumbnailers;
+    private LinkedHashMap<String, Thumbnailer> thumbnailers;
 
     /**
      * All Thumbnailers.
@@ -100,7 +97,7 @@ public class ThumbnailerManager implements Thumbnailer, ThumbnailerConstants {
             }
         });
 
-        thumbnailers = new ChainedHashMap<>(DEFAULT_NB_MIME_TYPES, DEFAULT_NB_THUMBNAILERS_PER_MIME);
+        thumbnailers = new LinkedHashMap<>(DEFAULT_NB_MIME_TYPES, DEFAULT_NB_THUMBNAILERS_PER_MIME);
         allThumbnailers = new LinkedList<>();
 
         thumbHeight = THUMBNAIL_DEFAULT_HEIGHT;
@@ -222,7 +219,7 @@ public class ThumbnailerManager implements Thumbnailer, ThumbnailerConstants {
             try {
                 thumbnailer.close();
             } catch (IOException e) {
-                mLog.error("Error during close of Thumbnailer:", e);
+                log.error("Error during close of Thumbnailer:", e);
             }
         }
 
@@ -253,7 +250,7 @@ public class ThumbnailerManager implements Thumbnailer, ThumbnailerConstants {
         // MIME might be known already (in case of recursive thumbnail managers)
         if (mimeType == null) {
             mimeType = MimeTypeDetector.getMimeType(input);
-            mLog.debug("Detected Mime-Typ: " + mimeType);
+            log.debug("Detected Mime-Typ: " + mimeType);
         }
 
         if (mimeType != null) {
@@ -298,14 +295,16 @@ public class ThumbnailerManager implements Thumbnailer, ThumbnailerConstants {
      * temporary files could not be created.
      */
     private boolean executeThumbnailers(String useMimeType, File input, File output, String detectedMimeType) throws IOException {
-        for (Thumbnailer thumbnailer : thumbnailers.getIterable(useMimeType)) {
-            try {
-                thumbnailer.generateThumbnail(input, output, detectedMimeType);
-                return true;
-            } catch (ThumbnailerException e) {
-                // This Thumbnailer apparently wasn't suitable, so try next
-                mLog.warn("Warning: " + thumbnailer.getClass().getName() + " could not handle the file " + input.getName() + " (trying next)", e);
-            }
+        Thumbnailer thumbnailer = thumbnailers.get(useMimeType);
+        if (null == thumbnailer) {
+            return false;
+        }
+        try {
+            thumbnailer.generateThumbnail(input, output, detectedMimeType);
+            return true;
+        } catch (ThumbnailerException e) {
+            // This Thumbnailer apparently wasn't suitable, so try next
+            log.warn("Warning: " + thumbnailer.getClass().getName() + " could not handle the file " + input.getName() + " (trying next)", e);
         }
         return false;
     }

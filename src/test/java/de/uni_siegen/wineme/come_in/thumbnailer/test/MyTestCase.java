@@ -1,36 +1,14 @@
 package de.uni_siegen.wineme.come_in.thumbnailer.test;
 
-import static org.junit.Assert.*;
-
-import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import static org.junit.Assert.*;
 
 public class MyTestCase implements TestConfiguration {
 
-	protected static Logger mLog = Logger.getLogger(MyTestCase.class);
-
-
-	private static final String LOG4J_CONFIG_FILE = "test/log4j.properties";
-	static
-	{
-		System.setProperty("log4j.configuration", LOG4J_CONFIG_FILE);
-		
-		File logConfigFile = new File(LOG4J_CONFIG_FILE);
-	    if (!logConfigFile.exists()) {
-	        System.out.println("ERROR: Logging configuration file not found: " + logConfigFile.getAbsolutePath());
-	        System.exit(1); // Abort
-	      }
-
-      PropertyConfigurator.configureAndWatch(logConfigFile.getAbsolutePath(), 10 * 1000);
-      mLog.info("Logging initialized");
-
-	}
-	
 	public void assertFileExists(File file)
 	{
 		assertFileExists("", file);

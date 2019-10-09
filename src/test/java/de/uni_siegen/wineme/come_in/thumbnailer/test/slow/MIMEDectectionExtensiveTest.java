@@ -23,7 +23,7 @@ public class MIMEDectectionExtensiveTest implements TestConfiguration {
     private File file;
     private String expectedMime;
 
-    public MIMEDectectionExtensiveTest(String expectedMime, File file) {
+    public MIMEDectectionExtensiveTest(String fileName, String expectedMime,  File file) {
         this.file = file;
         this.expectedMime = expectedMime;
     }
@@ -37,7 +37,7 @@ public class MIMEDectectionExtensiveTest implements TestConfiguration {
     }
 
     @Parameters
-    public static Collection<Object[]> suite() throws Exception {
+    public static Collection<Object[]> parameters() throws Exception {
         File path = new File(TESTFILES_DIR);
         File tmpDir = File.createTempFile("test-mime-detection", "");
         File[] testfiles = path.listFiles();

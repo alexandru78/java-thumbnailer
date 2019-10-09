@@ -22,7 +22,7 @@
 package de.uni_siegen.wineme.come_in.thumbnailer.util;
 
 import de.uni_siegen.wineme.come_in.thumbnailer.UnsupportedInputFileFormatException;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -36,6 +36,7 @@ import java.io.InputStream;
  * @author Benjamin
  * @TODO Comment. Refactor?? (3 lines of code per generation)
  */
+@Slf4j
 public class ResizeImage {
 
     /**
@@ -64,7 +65,6 @@ public class ResizeImage {
     /**
      * The logger for this class
      */
-    private static final Logger mLog = Logger.getLogger(ResizeImage.class);
     public int resizeMethod = RESIZE_FIT_ONE_DIMENSION;
     public int extraOptions = DO_NOT_SCALE_UP;
     BufferedImage inputImage;
@@ -193,10 +193,10 @@ public class ResizeImage {
 
         if (!scalingComplete && observer != null) {
             // ImageObserver must wait for ready
-            if (mLog.isDebugEnabled()) {
+            if (log.isDebugEnabled()) {
                 throw new RuntimeException("Scaling is not yet complete!");
             } else {
-                mLog.warn("ResizeImage: Scaling is not yet complete!");
+                log.warn("ResizeImage: Scaling is not yet complete!");
 
                 while (!observer.ready) {
                     System.err.println("Waiting .4 sec...");

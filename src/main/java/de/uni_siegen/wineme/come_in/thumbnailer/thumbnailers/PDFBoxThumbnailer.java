@@ -25,10 +25,10 @@ import de.uni_siegen.wineme.come_in.thumbnailer.FileDoesNotExistException;
 import de.uni_siegen.wineme.come_in.thumbnailer.ThumbnailerException;
 import de.uni_siegen.wineme.come_in.thumbnailer.util.ResizeImage;
 import org.apache.commons.io.FileUtils;
-import org.apache.pdfbox.pdfviewer.PageDrawer;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.rendering.PDFRenderer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -36,7 +36,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImagingOpException;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.Iterator;
 
 /**
  * Renders the first page of a PDF file into a thumbnail.
@@ -91,9 +91,9 @@ public class PDFBoxThumbnailer extends AbstractThumbnailer {
      * @throws IOException
      */
     private BufferedImage writeImageFirstPage(PDDocument document, int imageType) throws IOException {
-        List<?> pages = document.getDocumentCatalog().getAllPages();
+        Iterator<PDPage> pages = document.getDocumentCatalog().getPages().iterator();
 
-        PDPage page = (PDPage) pages.get(0);
+        PDPage page = pages.next();
 
         // resolution: Unfortunately, the resolution is in integer in the call ... so we approximate by taking slightly less (rounding down).
             /* Before:
@@ -103,29 +103,25 @@ public class PDFBoxThumbnailer extends AbstractThumbnailer {
     	*/
 
         // Here is the main work:
-        BufferedImage image = convertToImage(page, imageType, thumbWidth, thumbHeight);
+        BufferedImage image = convertToImage(document, page, 0, imageType, thumbWidth, thumbHeight);
 
         return image;
     }
 
-    private BufferedImage convertToImage(PDPage page, int imageType, int thumbWidth, int thumbHeight)
+    private BufferedImage convertToImage(PDDocument document, PDPage page, int pageIndex, int imageType, int thumbWidth, int thumbHeight)
             throws IOException {
-        PDRectangle mBox = page.findMediaBox();
+        PDRectangle mBox = page.getMediaBox();
         float widthPt = mBox.getWidth();
-        float heightPt = mBox.getHeight();
-        int widthPx = thumbWidth;                        // Math.round(widthPt * scaling);
-        int heightPx = thumbHeight;                        // Math.round(heightPt * scaling);
         float scaling = thumbWidth / widthPt; // resolution / 72.0F;
-        Dimension pageDimension = new Dimension((int) widthPt, (int) heightPt);
-        BufferedImage retval = new BufferedImage(widthPx, heightPx, imageType);
+        BufferedImage retval = new BufferedImage(thumbWidth, thumbHeight, imageType);
         Graphics2D graphics = (Graphics2D) retval.getGraphics();
         graphics.setBackground(TRANSPARENT_WHITE);
         graphics.clearRect(0, 0, retval.getWidth(), retval.getHeight());
         graphics.scale(scaling, scaling);
-        PageDrawer drawer = new PageDrawer();
-        drawer.drawPage(graphics, page, pageDimension);
+        PDFRenderer renderer = new PDFRenderer(document);
+        renderer.renderPageToGraphics(pageIndex, graphics);
         try {
-            int rotation = page.findRotation();
+            int rotation = page.getRotation();
             if ((rotation == 90) || (rotation == 270)) {
                 int w = retval.getWidth();
                 int h = retval.getHeight();
