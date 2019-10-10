@@ -2,44 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d5cf95e-27f6-46ea-b081-d512b6d74bd0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_cli_commons_cli_1_3_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_jmimemagic_jmimemagic_0_1_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_exec_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_pdfbox_fontbox_1_8_10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_pdfbox_jempbox_1_8_10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_pdfbox_pdfbox_1_8_10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_3_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_3_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_schemas_3_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_scratchpad_3_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_2_6_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_core_asl_1_5_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_jaxrs_1_5_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_mapper_asl_1_5_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_xc_1_5_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__oro_oro_2_0_8.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__stax_stax_api_1_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xerces_xercesImpl_2_4_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xmlParserAPIs_2_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java-thumbnailer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/java-thumbnailer.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/ThumbnailerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/ThumbnailerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/thumbnailers/PDFBoxThumbnailer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/thumbnailers/PDFBoxThumbnailer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/util/ChainedHashMap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/util/ResizeImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/util/ResizeImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/util/ThumbnailReadyObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/util/ThumbnailReadyObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/util/mime/PptFileIdentifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/uni_siegen/wineme/come_in/thumbnailer/util/mime/PptFileIdentifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/uni_siegen/wineme/come_in/thumbnailer/test/ChainedHashtableTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/uni_siegen/wineme/come_in/thumbnailer/test/MyTestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/de/uni_siegen/wineme/come_in/thumbnailer/test/MyTestCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/uni_siegen/wineme/come_in/thumbnailer/test/slow/MIMEDectectionExtensiveTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/de/uni_siegen/wineme/come_in/thumbnailer/test/slow/MIMEDectectionExtensiveTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/de/uni_siegen/wineme/come_in/thumbnailer/test/slow/ThumbnailImageStrangeFilesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/de/uni_siegen/wineme/come_in/thumbnailer/test/slow/ThumbnailImageStrangeFilesTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,11 +42,6 @@
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1920" />
-    <option name="height" value="1138" />
   </component>
   <component name="ProjectId" id="1RxSl2ChcryPWZhfhQ6DTQzvcky" />
   <component name="ProjectInspectionProfilesVisibleTreeState">
