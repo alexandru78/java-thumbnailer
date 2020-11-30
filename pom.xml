@@ -108,9 +108,9 @@
 
     <distributionManagement>
         <repository>
-            <id>m2</id>
-            <name>Repository maven.antea.bogus</name>
-            <url>scpexe://maven.antea.bogus/srv/maven</url>
+            <id>github</id>
+            <name>GitHub antea Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/antea/packages</url>
         </repository>
     </distributionManagement>
 </project>
