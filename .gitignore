@@ -10,3 +10,5 @@ test/reports
 /.fbprefs
 /reports/
 target
+.idea
+*.iml
