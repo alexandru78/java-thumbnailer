@@ -5,7 +5,7 @@
     <artifactId>java-thumbnailer</artifactId>
     <groupId>com.anteash</groupId>
     <packaging>jar</packaging>
-    <version>0.9.0</version>
+    <version>0.9.1</version>
 
     <dependencies>
         <dependency>
